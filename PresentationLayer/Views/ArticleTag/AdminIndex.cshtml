@@ -1,0 +1,89 @@
+﻿@model ArticleTagListViewModel
+@{
+    ViewData["Title"] = "AdminIndex";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+<div class="container-fluid m-2">
+    <h3>Makale Etiketleri</h3>
+    <div class="col-8 m-auto">
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>MakaleID</th>
+                    <th>EtiketID</th>
+                    <th>İşlemler</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var atag in Model.ArticleTags)
+                {
+
+                    <tr>
+                        <td>@atag.Article.ArticleTitle</td>
+                        <td>@atag.Tag.TagName</td>
+
+                        <td>
+                            <div class="d-flex">
+                                <a href="/ArticleTag/DeleteArticleTag/@atag.ArticleID-@atag.TagID " class="btn btn-danger">Sil</a>
+                            </div>
+                        </td>
+
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+        @using (Html.BeginForm("AddArticleTag", "ArticleTag", FormMethod.Post))
+        {
+            <div class="container-fluid py-4" id="poster">
+
+                <div class="form form-group font-weight-bolder  mt-3">
+                    <div class="form-row">
+                        <div class="col-form-label d-flex align-items-center col-1">Makaleler :</div>
+
+                        <div class="col">
+                            @Html.DropDownListFor(m => m.ArticleTag.ArticleID, (List<SelectListItem>)ViewBag.makaleler)
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-form-label d-flex align-items-center col-1">Etiketler :</div>
+                        <div class="col-3 ">
+                            <div class="d-flex flex-wrap">
+                                @{Model.CheckedTag = new bool[Enumerable.Count(ViewBag.etiketler)];
+                                    Model.chkboxes = new Checkboxes[Enumerable.Count(ViewBag.etiketler)];
+                                }
+                                @for (int i = 0; i < Model.CheckedTag.Count(); i++)
+                                {
+                                    Model.chkboxes[i] = new Checkboxes { id = Model.Tags.ElementAt(i).TagID, chkValue = Model.CheckedTag[i] };
+                                    <div class="d-block">
+
+
+                                        @Html.CheckBoxFor(m => m.chkboxes[i].chkValue)
+                                        @Html.HiddenFor(m => m.chkboxes[i].id)
+                                        @Html.Label(Model.Tags[i].TagName)
+                                        &nbsp;
+
+                                    </div>
+
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+                    <button class="btn btn-success px-5">Ekle</button>
+                </div>
+            </div>
+
+        }
+
+    </div>
+</div>

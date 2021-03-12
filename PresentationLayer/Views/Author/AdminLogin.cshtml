@@ -1,0 +1,45 @@
+﻿@model AuthorListViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AdminLogin</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="container">
+        <table class="table table-borderless mx-auto">
+            <tr>
+                <td colspan="2" class="text-center"> <img src="~/logo.png" width="200" height="200" /></td>
+            </tr>
+            <tr>
+                <td colspan="2" class="text-center">  <h1 class="h3 font-weight-normal">Please sign in</h1></td>
+            </tr>
+
+            @using (Html.BeginForm("Login", "Author", FormMethod.Post, new { @class = "text-center" }))
+            {
+                <tr class="d-flex justify-content-center">
+                    <td><div>@Html.LabelFor(m => m.Author.AuthorEmail, "Email:")</div> </td>
+                    <td><div>@Html.TextBoxFor(m => m.Author.AuthorEmail,"Email",new {@class="form-control",@required = "" })</div>  </td>
+                </tr>
+                <tr class="d-flex justify-content-center">
+                    <td><div>@Html.LabelFor(m => m.Author.AuthorPassword, "Şifre:")</div></td>
+                    <td><div>@Html.PasswordFor(m => m.Author.AuthorPassword, new { @class = "form-control", @required="" } )</div></td>
+                </tr>
+                <tr class="d-flex justify-content-center">
+                    <td><button class="btn btn-info  px-5"> Login </button></td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

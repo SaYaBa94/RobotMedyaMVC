@@ -1,0 +1,19 @@
+﻿@model CategoryListViewModel
+<h3>Kategoriler</h3>
+<div class="list-group" id="categories">
+
+    @{var css = "list-group-item";}
+    @foreach (var category in Model.Categories)
+    {
+        css = "list-group-item";
+        if (Convert.ToInt32(category.CategoryID) == Model.CurrentCategory)
+        {
+            css += " active";
+        }
+
+        <a class=@css asp-area="" asp-controller="Article" asp-action="Index" asp-route-typeid=@category.CategoryTypeID asp-route-category=@category.CategoryID id=@category.CategoryName>@category.CategoryName</a>
+
+    }
+</div>
+
+

@@ -1,0 +1,23 @@
+﻿@model TagListViewModel
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h3>Güncelle</h3>
+@using (Html.BeginForm("UpdateTag", "Tag", FormMethod.Post))
+{
+    <div class="container justify-content-center ">
+        <div class="row d-flex">
+            <div class="col-1 font-weight-bold text-right">ID :</div>
+            <div class="col-3 mb-2">@Html.TextBoxFor(t => t.Tag.TagID, new { @readonly = "readonly"})</div>
+        </div>
+        <div class="row d-flex">
+            <div class="col-1 font-weight-bold text-right">Etiket :</div>
+            <div class="col-3 mb-3">@Html.TextBoxFor(t => t.Tag.TagName)</div>
+        </div>
+        <button class="btn btn-warning px-4">Güncelle</button>
+    </div>
+
+
+}

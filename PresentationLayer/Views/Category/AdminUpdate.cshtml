@@ -1,0 +1,29 @@
+﻿@model CategoryListViewModel
+@{
+    ViewData["Title"] = "AdminUpdate";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h3>Güncelle</h3>
+@using (Html.BeginForm("UpdateCategory", "Category", FormMethod.Post))
+{
+<div class="container justify-content-center ">
+    <div class="row d-flex">
+        <div class="col-2 font-weight-bold text-right">ID :</div>
+        <div class="col-4 mb-2">@Html.TextBoxFor(c => c.Category.CategoryID, new { @readonly = "readonly" })</div>
+    </div>
+    <div class="row d-flex">
+        <div class="col-2 font-weight-bold text-right">Kategori :</div>
+        <div class="col-4 mb-3">@Html.TextBoxFor(c => c.Category.CategoryName)</div>
+    </div>
+    <div class="row d-flex">
+        <div class="col-2 font-weight-bold text-right">KategoriTipi :</div>
+        <div class="col-4 mb-3"> @Html.DropDownListFor(a => a.Category.CategoryTypeID, (List<SelectListItem>)ViewBag.kategoriTipleri)</div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-6 d-inline-flex justify-content-center"><button class="btn btn-warning px-4 ">Güncelle</button></div>
+    </div>
+</div>
+}

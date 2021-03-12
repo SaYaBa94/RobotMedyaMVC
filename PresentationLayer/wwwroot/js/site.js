@@ -1,0 +1,1 @@
+﻿CKEDITOR.replace("Article.ArticleBody", { height: 500 });

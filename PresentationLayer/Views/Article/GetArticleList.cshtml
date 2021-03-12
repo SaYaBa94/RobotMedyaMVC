@@ -1,0 +1,31 @@
+﻿@model ArticleListViewModel
+@{
+    ViewData["Title"] = Model.ArticleTags[0].Tag.TagName;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@for (int i = 0; i < Model.Articles.Count(); i++)
+{
+    <div class="row mb-2">
+        <div class="col">
+            <article class="row no-gutters border rounded overflow-hidden mb-4 shadow-sm h-md-250 ">
+                <div class="col-5 align-self-center " style="max-width:449px" id="article-img-container-@i">
+                    <a href="/Article/GetArticle?id=@Model.Articles[i].ArticleID" class="stretched-link" id="article-link-@i">
+                        <img class="bd-placeholder-img img-thumbnail img-fluid " style="max-width:450px; width:100%;" src="@Model.Articles[i].ArticleThumbnail" alt="@Model.Articles[i].ArticleTitle.Split(" ")[0]" id="article-img-@i" focusable="false" />
+                    </a>
+                </div>
+                <div class="col p-3" id="article-info">
+                    <strong class="d-inline-block mb-2 text-primary" id="article-category-@i">@Model.Articles[i].Category.CategoryName</strong>
+
+                    <h3 class="mb-0 card-title" id="@Model.Articles[i].ArticleTitle"><a href="/Article/GetArticle?id=@Model.Articles[i].ArticleID">@Model.Articles[i].ArticleTitle </a></h3>
+
+                    <time class="mb-1 text-muted">@Model.Articles[i].CreateDate.ToString("dddd, dd MMMM yyyy HH:mm:ss")</time>
+
+                    <div class="card-text mb-auto" style="max-height: 4.38em; overflow:hidden;" id="@Model.Articles[i].ArticleTitle-summary">@Html.Raw(Model.Articles[i].ArticleBody.SkipImgTags())</div>
+
+                </div>
+            </article>
+
+        </div>
+    </div>
+}

@@ -1,0 +1,99 @@
+﻿@model AuthorListViewModel
+@{
+    ViewData["Title"] = "Yazarlar";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="container-fluid m-2">
+    <h3>Yazarlar</h3>
+    <div class="col-10 m-auto">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th><div class="col font-weight-bold">Id</div></th>
+                    <th><div class="col font-weight-bold">Ad</div></th>
+                    <th><div class="col font-weight-bold">Soyad</div></th>
+                    <th><div class="col font-weight-bold">Email</div></th>
+                    <th><div class="col font-weight-bold">Avatar</div></th>
+                    <th><div class="col font-weight-bold">Aktiflik</div></th>
+                    <th><div class="col font-weight-bold">İşlemler</div></th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var author in Model.Authors)
+                {
+                    <tr>
+                        <td><div class="col">@author.AuthorID</div></td>
+                        <td><div class="col">@author.AuthorName</div></td>
+                        <td><div class="col">@author.AuthorSurname</div></td>
+                        <td><div class="col">@author.AuthorEmail</div></td>
+                        <td><div class="col">@author.AuthorImg</div></td>
+                        <td><div class="col">@author.IsEnable</div></td>
+                        <td>
+                                    <a href="/Author/AdminUpdate/@author.AuthorID" class="btn btn-warning">Güncelle</a>
+                                    <a href="/Author/DeactiveAuthor/@author.AuthorID" class="btn btn-danger">Pasif Yap</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @using (Html.BeginForm("AddAuthor", "Author", FormMethod.Post))
+        {
+            <div class="container-fluid py-4">
+
+                <div class="form form-group font-weight-bolder  mt-3">
+                    <div class="form-row">
+                        <div class="col-form-label d-flex align-items-center col-1">Ad :</div>
+
+                        <div class="col">
+                            @Html.TextBoxFor(a => a.Author.AuthorName)
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-form-label d-flex align-items-center col-1">Soyad :</div>
+
+                        <div class="col">
+                            @Html.TextBoxFor(a => a.Author.AuthorSurname)
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-form-label d-flex align-items-center col-1">Email :</div>
+
+                        <div class="col">
+                            <div>@Html.TextBoxFor(m => m.Author.AuthorEmail, "Email", new { @class = "form-control", @required = "" })</div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-form-label d-flex align-items-center col-1 ">Şifre :</div>
+
+                        <div class="col">
+                            <div>@Html.PasswordFor(m => m.Author.AuthorPassword, new { @class = "form-control", @required = "" })</div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-form-label d-flex align-items-center col-1">Avatar :</div>
+
+                        <div class="col">
+                            @Html.TextBoxFor(a => a.Author.AuthorImg)
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-form-label d-flex align-items-center col-1">Aktiflik :</div>
+
+                        <div class="col">
+                            @Html.CheckBoxFor(a => a.Author.IsEnable)
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <button class="btn btn-success px-5">Ekle</button>
+                </div>
+            </div>
+        }
+
+    </div>
+
+</div>

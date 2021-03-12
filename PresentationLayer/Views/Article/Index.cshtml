@@ -1,0 +1,60 @@
+﻿@model ArticleListViewModel
+@{
+    ViewData["Title"] = "Robot Medya";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@for (int i = 0; i < Model.Articles.Count(); i++)
+{
+    if (i % 2 == 0)
+    {
+        <div class="row mb-2" id="article-card-@i">
+            <div class="col">
+                <article class="row no-gutters border rounded overflow-hidden mb-4 shadow-sm h-md-250 ">
+                    <div class="col-5 align-self-center " style="max-width:450px" id="article-img-container-@i">
+                        <a href="/Article/GetArticle?id=@Model.Articles[i].ArticleID" class="stretched-link" id="article-link-@i">
+                            <img class="bd-placeholder-img img-thumbnail img-fluid "style="max-width:450px; width:100%;"   src="@Model.Articles[i].ArticleThumbnail" alt="@Model.Articles[i].ArticleTitle.Split(" ")[0]" id="article-img-@i"  focusable="false" />
+                        </a>
+                    </div>
+                    <div class="col p-3" id="article-info-@i">
+                        <strong class="d-inline-block mb-2 text-primary" id="@Model.Articles[i].Category.CategoryName-@i">@Model.Articles[i].Category.CategoryName</strong>
+
+                        <h5 class="mb-0 card-title" id="@Model.Articles[i].ArticleTitle"><a href="/Article/GetArticle?id=@Model.Articles[i].ArticleID">@Model.Articles[i].ArticleTitle </a></h5>
+
+                        <time class="mb-1 text-muted">@Model.Articles[i].CreateDate.ToString("dddd, dd MMMM yyyy HH:mm:ss")</time>
+
+                        <div class="card-text mb-auto font-weight-normal" id="@Model.Articles[i].ArticleTitle.Trim()-summary" style="max-height: 4.38em; overflow:hidden;">@Html.Raw(Model.Articles[i].ArticleBody.SkipImgTags().SkipTableTags().SkipIFrameTags())</div>
+
+                    </div>
+                </article>
+            </div>
+        </div>
+    }
+    else
+    {
+
+        <div class="row mb-2" id="article-card-@i">
+            <div class="col-md">
+                <article class="row no-gutters border rounded overflow-hidden mb-4 shadow-sm h-md-250 ">
+                    <div class="col p-3" id="article-info-@i">
+                        <strong class="d-inline-block mb-2 text-primary" id="@Model.Articles[i].Category.CategoryName-@i">@Model.Articles[i].Category.CategoryName</strong>
+
+                        <h5 class="mb-0 card-title" id="@Model.Articles[i].ArticleTitle"><a href="/Article/GetArticle?id=@Model.Articles[i].ArticleID">@Model.Articles[i].ArticleTitle </a></h5>
+
+                        <time class="mb-1 text-muted">@Model.Articles[i].CreateDate.ToString("dddd, dd MMMM yyyy HH:mm:ss")</time>
+                        <div class="card-text mb-auto" id="@Model.Articles[i].ArticleTitle.Trim()-summary" style="max-height: 4.38em; overflow:hidden;">@Html.Raw(Model.Articles[i].ArticleBody.SkipImgTags().SkipTableTags().SkipIFrameTags())</div>
+
+                    </div>
+                    <div class="col-5 align-self-center text-right" style="max-width:450px" id="article-img-container-@i">
+                        <a href="/Article/GetArticle?id=@Model.Articles[i].ArticleID" class="stretched-link" id="article-link-@i">
+                            <img class="bd-placeholder-img img-thumbnail img-fluid " style="max-width:450px; width:100%;" src="@Model.Articles[i].ArticleThumbnail" alt="@Model.Articles[i].ArticleTitle.Split(" ")[0]" id="article-img-@i" focusable="false" />
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    }
+
+}

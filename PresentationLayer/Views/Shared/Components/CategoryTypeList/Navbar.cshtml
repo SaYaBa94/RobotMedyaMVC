@@ -1,0 +1,27 @@
+﻿@model CategoryTypeListViewModel
+
+
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <div class="row justify-content-between" style="width:100%">
+                    <a class="navbar-brand" asp-area="" asp-controller="Article" asp-action="Index"><img src="~/banner.png" />RobotMedya</a>
+                    <div></div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1" id="nav-items">
+                        @for (int i = 0; i < Model.CategoryTypes.Count(); i++)
+                        {
+                            <li class="nav-item" id=@Model.CategoryTypes[i].CategoryTypeName>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Article" asp-action="Index" asp-route-typeid=@Model.CategoryTypes[i].CategoryTypeID asp-route-category=@Model.firstCategory[i] id="@Model.CategoryTypes[i].CategoryTypeName-link">@Model.CategoryTypes[i].CategoryTypeName</a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+

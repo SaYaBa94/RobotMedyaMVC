@@ -1,0 +1,71 @@
+﻿@model CategoryTypeListViewModel
+@{
+    ViewData["Title"] = "Kategori Tipleri";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h3>Kategori Tipleri</h3>
+
+<div class="container-fluid m-2">
+    <div class="col-6 m-auto">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th><div class="col">ID</div></th>
+                    <th><div class="col">Kategori Tipi</div></th>
+                    <th><div class="col">İşlemler</div></th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+
+                @foreach (var category in Model.CategoryTypes)
+                {
+                    <tr>
+                        <td><div class="col">@category.CategoryTypeID</div></td>
+                        <td><div class="col">@category.CategoryTypeName</div></td>
+                        <td>
+                            <div class="col">
+                                <a href="/CategoryType/AdminUpdate/@category.CategoryTypeID" class="btn btn-warning m-1">Güncelle</a>
+                                @if (category.IsEnable == true)
+                                {
+                                    <a href="/CategoryType/DeactiveCategoryType/@category.CategoryTypeID" class="btn btn-danger m-1">Pasif Yap</a>
+                                }
+                                else
+                                {
+                                    <a href="/CategoryType/ActiveCategoryType/@category.CategoryTypeID" class="btn btn-success m-1">Aktif Yap</a>
+                                }
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        @using (Html.BeginForm("AddCategoryType", "CategoryType", FormMethod.Post))
+        {
+            <div class="container-fluid">
+
+                <div class="form form-group font-weight-bolder  mt-3">
+                    <div class="form-row">
+                        <div class="col-form-label d-flex col-2 font-weight-bold">Kategori Tipi :</div>
+
+                        <div class="col">
+                            @Html.TextBoxFor(c => c.CategoryType.CategoryTypeName)
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-form-label d-flex col-2 font-weight-bold">Aktiflik</div>
+
+                        <div class="col">
+                            @Html.CheckBoxFor(c => c.CategoryType.IsEnable)
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <button class="btn btn-success px-5">Ekle</button>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

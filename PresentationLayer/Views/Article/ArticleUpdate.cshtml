@@ -1,0 +1,76 @@
+﻿@model ArticleListViewModel
+@{
+    ViewData["Title"] = "ArticleUpdate";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>ArticleUpdate</h1>
+
+@using (Html.BeginForm("UpdateArticle", "Article", FormMethod.Post))
+{
+    <div class="container-fluid py-4">
+
+
+
+        <div class="form form-group font-weight-bolder  mt-3">
+
+            <div class="form-row">
+                <div class="col-form-label d-flex align-items-center col-1">ID :</div>
+                <div class="col">
+
+                    @Html.TextBoxFor(a => a.Article.ArticleID, new { @readonly = "readonly" })
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-form-label d-flex align-items-center col-1">Kategori :</div>
+
+                <div class="col">
+                    @Html.DropDownListFor(a => a.Article.CategoryID, (List<SelectListItem>)ViewBag.kategoriler)
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-form-label d-flex align-items-center col-1">Yazar :</div>
+
+                <div class="col">
+                    @Html.DropDownListFor(a => a.Article.AuthorID, (List<SelectListItem>)ViewBag.yazarlar)
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-form-label d-flex align-items-center col-1">Başlık :</div>
+
+                <div class="col">
+                    @Html.TextBoxFor(a => a.Article.ArticleTitle)
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-form-label d-flex align-items-center col-1 ">Gövde :</div>
+
+                <div class="col">
+                    @Html.TextAreaFor(a => a.Article.ArticleBody)
+                   
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-form-label d-flex align-items-center col-1">Küçük Resim :</div>
+
+                <div class="col">
+                    @Html.TextBoxFor(a => a.Article.ArticleThumbnail)
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-form-label d-flex align-items-center col-1">Aktiflik :</div>
+
+                <div class="col">
+                    @Html.CheckBoxFor(a => a.Article.IsEnable)
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <button class="btn btn-warning px-5">Güncelle</button>
+        </div>
+    </div>
+}
+
+<script src="~/lib/ckeditor/ckeditor.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>

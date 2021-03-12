@@ -1,0 +1,68 @@
+﻿@model AuthorListViewModel
+@{
+    ViewData["Title"] = "AdminUpdate";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>AdminUpdate</h1>
+@using (Html.BeginForm("UpdateAuthor", "Author", FormMethod.Post))
+{
+    <div class="container-fluid py-4">
+
+
+        <div class="form form-group font-weight-bolder  mt-3">
+            <div class="form-row">
+                <div class="col-form-label d-flex align-items-center col-1">Id :</div>
+
+                <div class="col">
+                    @Html.TextBoxFor(a => a.Author.AuthorID)
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-form-label d-flex align-items-center col-1">Ad :</div>
+
+                <div class="col">
+                    @Html.TextBoxFor(a => a.Author.AuthorName)
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-form-label d-flex align-items-center col-1">Soyad :</div>
+
+                <div class="col">
+                    @Html.TextBoxFor(a => a.Author.AuthorSurname)
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-form-label d-flex align-items-center col-1">Email :</div>
+
+                <div class="col">
+                    @Html.TextBoxFor(a => a.Author.AuthorEmail)
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-form-label d-flex align-items-center col-1 ">Şifre :</div>
+
+                <div class="col">
+                    <div>@Html.PasswordFor(m => m.Author.AuthorPassword, new { @class = "form-control", @required = "" })</div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-form-label d-flex align-items-center col-1">Avatar :</div>
+
+                <div class="col">
+                    @Html.TextBoxFor(a => a.Author.AuthorImg)
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-form-label d-flex align-items-center col-1">Aktiflik :</div>
+
+                <div class="col">
+                    @Html.CheckBoxFor(a => a.Author.IsEnable)
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <button class="btn btn-warning px-5">Güncelle</button>
+        </div>
+    </div>
+}
